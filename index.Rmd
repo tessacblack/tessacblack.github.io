@@ -3,9 +3,7 @@ title: "Tessa Black"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+## [Home](https://tessacblack.github.io) | [CV](https://tessacblack.github.io/cv) | [Research](https://tessacblack.github.io/research)
 
 ```{r, out.width = "30%", echo=FALSE}
 knitr::include_graphics("./media/TessaBlack_Fall2023_Headshot.jpg")
