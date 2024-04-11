@@ -1,7 +1,0 @@
----
-title: "BIOL 3100 Final Project"
-output: html_document
----
-
-### [Code so far](https://tessacblack.github.io/final_project/project_draft_tcb.R) 
-### [data](https://tessacblack.github.io/final_project/IU106_Social Behavior First and Last Five Minutes_Formatted_6-6-23.csv)
