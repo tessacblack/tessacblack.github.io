@@ -7,24 +7,56 @@ output:
     toc_float: yes
     css: styles.css
 title: "BIOL 3100 Final Project <br> <br> Effects of maternal stress and gut microbiome on offspring social behaviors in long-bout stress"
+author: "Tessa C. Black, Gregory E. Demas, Cara L. Wellman, Jessica A. Cusick"
+
 ---
 ```{r setup chunk, include=FALSE}
 if (!require("pacman")) install.packages("pacman"); library(pacman) # for rapid install if not in library
-pacman::p_load("tidyverse", "janitor", "patchwork", "skimr", "readxl", "lme4", "lmerTest", "glmmADMB", "arm", "emmeans", "knitr", "kableExtra", "car", "performance", "broom", "broom.mixed")
+pacman::p_load("tidyverse", "janitor", "patchwork", "skimr", "readxl", "lme4", "lmerTest", "glmmADMB", "arm", "emmeans", "knitr", "kableExtra", "car", "performance", "broom", "broom.mixed", "easystats")
 
 ```
 
 # Project background
-Acute and chronic social stress effects individuals of many species. The effects of long bouts of social stress on physiology and social behavior can differ among individuals, but what factors cause these individual differences is less clear. Manipulations to the maternal microbiome and maternal stress can have sex-specific effects on offspring social behaviors and may help explain variation in behavioral responses to prolonged stress. To test this, we investigated how maternal environment affects differences in offspring social behavior during long-bout stress in Siberian hamsters (*Phodopus sungorus*, figure 1). Pregnant females were exposed to one of four treatments (social stress, microbiome manipulation, both, or no treatment) for ten days. Adolescent offspring were exposed to a same-sex intruder for 15 minutes to assess behavioral responses to long bouts of social stress. We compared differences in the frequency and duration of offspring aggression, investigation, and escape behaviors during the first and last five minutes of the resident-intruder trial. 
-
-```{r hamsterimage, echo=FALSE, out.width="40%", fig.cap = "**Figure 1.** Image of Siberian hamster *Phodopus sungorus*. Image attribution: Salzgeber, P. (2007). Phodopus sungorus. In Wikimedia Commons. https://commons.wikimedia.org/wiki/File:PhodopusSungorus_1.jpg"}
+Essentially all individuals experience social stress, which may be acute or chronic. Individuals differ in their behavioral and physiological responses to stressors, but what factors cause these individual differences is less clear. Manipulations to the maternal microbiome and maternal stress can have sex-specific effects on offspring social behaviors and may help explain variation in behavioral responses to prolonged stress. **My research project investigates how maternal environment affects differences in offspring social behavior during long bouts of stress in Siberian hamsters** (*Phodopus sungorus*, figure 1).<br>
+<br>
+```{r hamsterimage, echo=FALSE, out.width="40%", fig.align = "center", fig.cap = "**Figure 1.** Image of Siberian hamster *Phodopus sungorus*. Image attribution: Salzgeber, P. (2007). Phodopus sungorus. In Wikimedia Commons. https://commons.wikimedia.org/wiki/File:PhodopusSungorus_1.jpg"}
 knitr::include_graphics("../media/PhodopusSungorus_1.jpg")
 ```
 
-# Data collection and preparation 
-Data collection occurred in Dec 2019 in the Demas Lab at Indiana University. Offspring behaviors during the first five minutes of the trial (t0-t5) were scored by JAC in the following few weeks. In Spring 2023, TCB scored offspring behaviors from the last five minutes (t10-t15). After data collection, the data needed to be cleaned and prepared for statistical analyses. 
+***
 
-## Data cleaning
+## Research questions <br>
+**Question:** How does early development (i.e., maternal environment) affect whether offspring vary in their social behaviors during the course of a long-bout social stressor? <br>
+**Hypothesis:** Maternal stress during offspring development has sex-specific effects on consistency in individual behavior during a long-bout social stressor <br>
+**Predictions:** <br>
+1. Female offspring from Stress Only mothers will display increased aggression throughout a long-bout stressor. <br>
+2. Other offspring will not display consistent behaviors throughout the long-bout stressor. <br>
+
+
+## Methods 
+### Maternal treatment <br>
+Pregnant females (n=34) were exposed to one of four treatments for ten days during pregnancy: control, antibiotic only, stress only, antibiotic + stress (figure 2) 
+```{r maternaltreatment, echo=FALSE, out.width="60%", fig.align = "center", fig.cap = "**Figure 2.** Maternal treatment graphic depicting the four treatment groups."}
+knitr::include_graphics("../media/maternal_methods.png")
+```
+
+<br>
+
+### Offspring behavioral trials <br>
+Juvenile offspring (n=14 males, 11 females) were exposed to a 15 minute social stressor following a resident-intruder paradigm. The intruder was placed into the focal individual's (i.e., offspring's) cage for 15 minutes, and offspring behaviors towards the intruder were scored (figure 3). <br>
+The first 5 minutes (t0-t5) and the last five minutes (t10-t15) of behaviors were scored and analyzed.
+```{r scoring_methods, echo=FALSE, out.width="60%", fig.align = "center", fig.cap = "**Figure 3.**Offspring in late adolescence (51-56 days old) were exposed to a resident-intruder trial as above. The intruder was placed in the focal individual’s cage for 15 minutes. Time scored is shown by red line."}
+knitr::include_graphics("../media/scoring_methods.png")
+```
+<br>
+**Four behaviors were scored: attack, investigation, escape, and grooming** (figure 4). <br> 
+<br>
+```{r behaviors, echo=FALSE, out.width="60%", fig.align = "center", fig.cap = "**Figure 4.** Actual screenshots of video data depicting the four social behaviors of interest."}
+knitr::include_graphics("../media/behaviors.png")
+```
+
+
+### Data cleaning
 Below is the code used to clean the and prepare the data for analyses. Several columns were removed from the data frame because they were not used in this project (these were columns imported into the excel sheet from the original project in 2019).
 ```{r clean data, message=FALSE, warning=FALSE, results="hide"}
 # Load data, clean names, view structure ####
@@ -57,10 +89,11 @@ tidy_hammies <- tidy_hammies %>%
 str(tidy_hammies)
 ```
 
-## Modeling Juvenile Behavior
-We analyzed the number (i.e., frequency) and total duration of behavioral bouts in the first and last five minutes (t0-t5 vs. t10-t15). For each model, we first tested for a three-way interaction between maternal treatment, offspring sex, and trial timing. If no significant three-way interaction was detected, we tested for a two-way interaction between offspring sex and maternal treatment. Only significant interactions were retained in the model; non-significant interaction terms were removed.
+### Modeling Juvenile Behavior
+We analyzed the number (i.e., frequency) and total duration of behavioral bouts in the first and last five minutes (t0-t5 vs. t10-t15). <br>
+For each model, we first tested for a three-way interaction between maternal treatment, offspring sex, and trial timing. If no significant three-way interaction was detected, we tested for a two-way interaction between offspring sex and maternal treatment. Only significant interactions were retained in the model; non-significant interaction terms were removed.
 
-### Summary of models
+#### Summary of models
 All models had two random effects: intruder identity and resident (offspring) identity, to control for individual differences in behavior. 
 All frequency models (GLMM's) used the bobyqa optimizer from the lme4 package for model fitting. 
 ```{r table1, echo=FALSE}
@@ -82,7 +115,7 @@ model_summary_table %>%
 
 # Agression frequency
 ## Results
-Our first model analyzes the effects of maternal treatment, offspring sex, and video timing on the frequency of aggressive behaviors. There was no significant three-way interaction, but we did detect a significant interaction between maternal treatment and offspring sex. Below is the code for model 1. 
+Our first model analyzes the effects of maternal treatment, offspring sex, and video timing on the frequency of aggressive behaviors. There was no significant three-way interaction, but we did detect a significant interaction between maternal treatment and offspring sex. Below is the code for model A.1. 
 ```{r modelA.1, include=TRUE, message=FALSE, warning=FALSE}
 modelA.1 <- tidy_hammies %>% 
   glmer(attack_number_of_occurrences ~ sex*treatment+trial_timing+scale(si_cort)
@@ -98,10 +131,10 @@ broom.mixed::tidy(modelA.1) %>%
   kableExtra::column_spec(column = 1:7, width = "200px")
 ```
 
-This is a poisson mixed model fitted to predict number of attack bouts. 
+Model A.1 is a poisson mixed model fitted to predict number of attack bouts. 
 <br>
 
-```{r aggression_freq_graph, echo=TRUE, message=FALSE, warning=FALSE, fig.cap="**Figure 2.** Plot of aggression frequency by sex and trial timing."}
+```{r aggression_freq_graph, echo=TRUE, message=FALSE, warning=FALSE, out.width="90%", fig.cap="**Figure 5.** Plot of aggression frequency by sex and trial timing."}
 tidy_hammies %>% 
   ggplot(aes(x=interaction(trial_timing, sex),
              y = attack_number_of_occurrences))+
@@ -115,7 +148,7 @@ tidy_hammies %>%
         panel.background = element_blank())
 ```
 <br>
-<br>
+
 We then used the lsmeans function from the emmeans R package to conduct pairwise comparisons of the maternal treatment and sex interactions. lsmeans uses a corrected p-value since to minimize the likelihood of a type I error, since we are performing a large number of comparisons. After running the lsmeans, none of our pairwise comparisons are statistically significant using a p-value of 0.05. 
 ```{r lsmeans(modelA.1), echo=TRUE, eval=FALSE}
 #pairwise comparisons with corrected p-value
@@ -165,7 +198,7 @@ Using the performance package we learned about in class, I simplified the overdi
 check_model(modelA.1)
 ```
 
-```{r check_modelA.1_plot, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
+```{r check_modelA.1_plot, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', out.width = "100%", fig.cap= "**Figure 6.** Output of performance::check_model function for model A.1."}
 knitr::include_graphics("../media/check_A.1_plot.png")
 ```
 
@@ -187,4 +220,11 @@ broom.mixed::tidy(modelA.2) %>%
   kableExtra::column_spec(column = 1:7, width = "200px")
 ```
 
-# Investigation Frequency
+# Summary and Conclusions 
+***
+- Overall, both frequency and duration of social behaviors decrease over a 15 minute trial <br>
+- Maternal treatment has significant effects on attack frequency. <br>
+- Maternal treatment has sex-specific effects on investigation frequency and duration, escape frequency, and grooming duration. <br>
+- Trial timing has significant effects on escape duration. <br>
+- This research suggests that early maternal experience affects behavior during long bouts of stress, and effects can be sex-specific <br>
+- Mechanisms driving changes in social behaviors during long bouts of stress need to be explored further 

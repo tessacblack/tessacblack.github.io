@@ -1,10 +1,40 @@
 ---
-title: "Tessa Black"
-output: html_document
+title: About Me
+output: 
+  html_document:
+    theme: sandstone
 ---
-
+<style type="text/css">
+.main-container {
+  max-width: 1800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
 ## [Home](https://tessacblack.github.io) | [CV](https://tessacblack.github.io/cv) | [Research](https://tessacblack.github.io/research) | [BIOL 3100 Final Project](https://tessacblack.github.io/final_project)
+<style>
+div {padding: 20px;}
+</style>
+<div class = "gray">
 
-```{r, out.width = "30%", echo=FALSE}
+<div style= "float:right;position: relative;top:10px">
+```{r, out.width = "300px",echo=FALSE}
 knitr::include_graphics("./media/TessaBlack_Fall2023_Headshot.jpg")
 ```
+</div>
+
+### I am a senior undergraduate at Utah Valley University. I will be graduating in December 2024 with a bachelor's degree in biology and a minor in chemistry. I'm currently conducting two independent research projects under Dr. Jess Cusick and Dr. Craig Thulin. My research with Dr. Cusick is investigating the effects of maternal stress and microbiome manipulations on offspring social behavior in Siberian hamsters. In Dr. Thulin's lab, I am developing a new protein detection method called the midwestern blot, with the ultimate goal of isolating and identifying xanthommatin pigment-binding proteins from monarch butterfly pupae. <br> <br> I am currently applying to biochemistry and chemical biology PhD programs. I hope to conduct interdisciplinary research focusing on the chemical processes which underlie larger biological functions. 
+</div>
+
+<style>
+div {padding: 20px;}
+</style>
+<div class = "gray">
+
+# Contact Info:
+Tessa C. Black<br>
+Utah Valley University<br>
+tessacblack@gmail.com<br>
+https://www.linkedin.com/in/tessacblack/
+
+</div>

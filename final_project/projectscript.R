@@ -177,7 +177,8 @@ print(attack_number_graph)
 # Investigation Occurrence: Model 3 ---------------------------------------
 
 modelB=glmer(investigation_number_of_occurrences ~sex*treatment*trial_timing+
-               scale(si_cort)+weight_at_trial+(1|intruder_id)+(1|juvenile_id), 
+               scale(si_cort)+weight_at_trial+
+               (1|intruder_id)+(1|juvenile_id), 
              family=poisson, glmerControl(optimizer="bobyqa"),
              data=tidy_hammies)
 
