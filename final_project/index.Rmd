@@ -228,3 +228,27 @@ broom.mixed::tidy(modelA.2) %>%
 - Trial timing has significant effects on escape duration. <br>
 - This research suggests that early maternal experience affects behavior during long bouts of stress, and effects can be sex-specific <br>
 - Mechanisms driving changes in social behaviors during long bouts of stress need to be explored further 
+```{r escape duration, include=TRUE, message=FALSE, warning=FALSE}
+modelC.3 <- lmer(jump_total_duration_s ~sex+treatment+trial_timing+scale(si_cort)+
+                   weight_at_trial+(1|intruder_id)+(1|juvenile_id), 
+                 data = tidy_hammies)
+# relevel treatment to control
+tidy_hammies <- tidy_hammies %>% 
+  mutate(treatment = relevel(treatment, ref = "Control"))
+
+```
+
+```{r escape_duration_graph, echo=TRUE, message=FALSE, warning=FALSE, out.width="90%", fig.cap="**Figure 7.** Plot of escape duration by sex and trial timing. This graph shows a huge increase in the duration of escape behaviors in the last five minutes of the trial across maternal treatment groups and across sex."}
+tidy_hammies %>% 
+  ggplot(aes(x=trial_timing, 
+             y = jump_total_duration_s))+
+  geom_boxplot(aes(fill = sex))+
+  labs(x= "Trial timing", 
+       y = "Duration of jump behaviors", 
+       fill = "Sex")+
+  theme(axis.line = element_line(color="black"),
+        panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(), 
+        panel.background = element_blank())
+```
+
