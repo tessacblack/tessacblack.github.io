@@ -893,11 +893,11 @@ section,
 /*--------------------------------------------------------------
 # Services Section
 --------------------------------------------------------------*/
-.services .service-item {
+.references .service-item {
   position: relative;
 }
 
-.services .service-item .icon {
+.references .service-item .icon {
   background: var(--accent-color);
   display: flex;
   align-items: center;
@@ -910,13 +910,13 @@ section,
   margin-right: 20px;
 }
 
-.services .service-item .icon i {
+.references .service-item .icon i {
   color: var(--contrast-color);
   font-size: 24px;
   line-height: 0;
 }
 
-.services .service-item:hover .icon {
+.references .service-item:hover .icon {
   background: var(--surface-color);
 }
 
@@ -1266,6 +1266,87 @@ section,
   margin-right: 8px;
   color: var(--accent-color);
 }
+
+/*--------------------------------------------------------------
+# H6 Section Section
+--------------------------------------------------------------*/
+
+
+.line {
+  padding-bottom: 40px;
+  position: relative;
+  padding-left: 20px;
+}
+
+.line h5 {
+  font-size: 28px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  position: relative;
+}
+
+.line h5:after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 100px;
+  height: 3px;
+  background: var(--accent-color);
+  bottom: 0;
+  padding-left: 20px;
+}
+
+.line p {
+  margin-bottom: 0;
+  padding-left: 20px;
+  margin-top: 0;
+}
+/*--------------------------------------------------------------
+# END H6 Section Section
+--------------------------------------------------------------*/
+
+
+
+
+/*--------------------------------------------------------------
+# Research Section Title
+--------------------------------------------------------------*/
+.section-title-research {
+  padding-bottom: 50px;
+  position: relative;
+}
+
+.section-title-research h2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  position: relative;
+}
+
+.section-title-research h2:after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: var(--accent-color);
+  left: 0;
+  bottom: 0;
+}
+
+.section-title-research p {
+  margin-bottom: 0;
+}
+
+
+
+
+
+
+
 
 /*--------------------------------------------------------------
 # Starter Section Section
