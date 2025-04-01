@@ -8,7 +8,7 @@ pacman::p_load("tidyverse", "janitor", "patchwork", "skimr", "readxl", "lme4",
 # Data Preparation --------------------------------------------------------
 
 # * Load data, clean names, view structure ####
-hammies <- read_csv("final_project/IU106_Social Behavior First and Last Five Minutes_Formatted_6-6-23.csv")
+hammies <- read_csv("IU106_Social Behavior First and Last Five Minutes_Formatted_6-6-23.csv")
 hammies <- janitor::clean_names(hammies)
 names(hammies)
 str(hammies)
